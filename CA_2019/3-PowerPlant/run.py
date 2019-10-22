@@ -6,19 +6,22 @@ import timeit
 dir_path = join(dirname(realpath(__file__)), "samples")
 
 def test():
-    input_files = [join(dir_path, f) for f in listdir(dir_path) if "input5" in f and isfile(join(dir_path, f))]
+    input_files = [join(dir_path, f) for f in listdir(dir_path) if "input" in f and isfile(join(dir_path, f))]
     for f in input_files:
-        print('======   '+str(basename(f))+'   =====')
-        solution = open(f.replace('input', 'output')).readline()
-        with open(f) as file:
-            content = [line.rstrip('\n') for line in file]
-        ret = sol.solve(content)
-        print('Expected: ' + str(solution))
-        print('Found: ' + str(ret))
-        if not str(solution).strip() == str(ret).strip():
-            print('Wrong !')
-    print('Success !')
-
+        try:
+            print('======   '+str(basename(f))+'   =====')
+            solution = open(f.replace('input', 'output')).readline()
+            with open(f) as file:
+                content = [line.rstrip('\n') for line in file]
+            ret = sol.solve(content)
+            print('Expected: ' + str(solution))
+            print('Found: ' + str(ret))
+            if not str(solution).strip() == str(ret).strip():
+                print('Wrong !')
+            else:
+                print('Success !')
+        except Exception as e:
+            print str(e)
 
 if __name__ == "__main__":
     # print(str(timeit.timeit(test, number=100)/100))
